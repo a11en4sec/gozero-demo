@@ -18,6 +18,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/user/info",
 				Handler: foo.UserInfoHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/update",
+				Handler: foo.UserUpdateHandler(serverCtx),
+			},
 		},
+		rest.WithPrefix("/userapi/v1"),
 	)
 }

@@ -40,6 +40,16 @@ type (
 	}
 )
 
+type (
+	UserCreateReq {
+		Mobile   string `json:"mobile"`
+		NickName string `json:"nickName"`
+	}
+	UserCreateResp {
+		Flag bool `json:"flag"`
+	}
+)
+
 // service block
 @server(
 	// jwt:   Auth
@@ -47,6 +57,11 @@ type (
 	prefix: userapi/v1
 )
 service user-api{
+	
+	@doc "新增用户"
+	@handler userCreate
+	post /user/create (UserCreateReq) returns (UserCreateResp)
+	
 	@doc "获取用户信息"
 	@handler userInfo
 	post /user/info (UserInforReq) returns (UserInforResp)

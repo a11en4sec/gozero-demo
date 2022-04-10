@@ -40,6 +40,6 @@ func (l *UserInfoLogic) UserInfo(req *types.UserInforReq) (resp *types.UserInfor
 
 	return &types.UserInforResp{
 		UserId:   user.Id,
-		NickName: user.Nickname.String,
+		NickName: user.Nickname,
 	}, nil
 }

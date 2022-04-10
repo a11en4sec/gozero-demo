@@ -55,6 +55,8 @@ type (
 	// jwt:   Auth
 	group: foo
 	prefix: userapi/v1
+	middleware: TestMiddleware
+	
 )
 service user-api{
 	

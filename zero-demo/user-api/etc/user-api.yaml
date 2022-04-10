@@ -15,9 +15,12 @@ Prometheus:
 #   Sampler: 1.0
 #   Batcher: jaeger
 
-# Log:
-#   ServiceName: usercenter-rpc
-#   Level: error
+Log:
+  ServiceName: user-api
+  Level: info
+  Encoding: plain
+  Mode: file
+  Path: logs
 
 Redis:
   Host: redis:6379
@@ -28,7 +31,6 @@ DB:
 Cache:
   - Host: 127.0.0.1:6379
     Pass:
-
 #rpc service
 # IdentityRpcConf:
 #   Endpoints:

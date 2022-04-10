@@ -4,12 +4,12 @@ import (
 	"flag"
 	"fmt"
 
-	"zero-demo/user-api/common/middleware"
 	"zero-demo/user-api/internal/config"
 	"zero-demo/user-api/internal/handler"
 	"zero-demo/user-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest"
 )
 
@@ -26,7 +26,10 @@ func main() {
 	defer server.Stop()
 
 	// 使用全局中间件
-	server.Use(middleware.NewGlobalMiddleware().Handle)
+	// server.Use(middleware.NewGlobalMiddleware().Handle)
+
+	// 全局关闭stat
+	logx.DisableStat()
 
 	handler.RegisterHandlers(server, ctx)
 

@@ -2,7 +2,8 @@ package foo
 
 import (
 	"context"
-	"errors"
+
+	"github.com/pkg/errors"
 
 	"zero-demo/user-api/internal/svc"
 	"zero-demo/user-api/internal/types"
@@ -29,6 +30,9 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 func (l *UserInfoLogic) UserInfo(req *types.UserInforReq) (resp *types.UserInforResp, err error) {
 	// todo: add your logic here and delete this line
 
+	if err := l.testOne(); err != nil {
+		logx.Errorf("err: %+v\n", err)
+	}
 	user, err := l.svcCtx.UserModel.FindOne(l.ctx, req.UserId)
 
 	if err != nil && err != model.ErrNotFound {
@@ -42,4 +46,16 @@ func (l *UserInfoLogic) UserInfo(req *types.UserInforReq) (resp *types.UserInfor
 		UserId:   user.Id,
 		NickName: user.Nickname,
 	}, nil
+}
+
+func (l *UserInfoLogic) testOne() error {
+	return l.testTwo()
+}
+
+func (l *UserInfoLogic) testTwo() error {
+	return l.testThree()
+}
+
+func (l *UserInfoLogic) testThree() error {
+	return errors.Wrap(errors.New("故意报错"), "测试堆栈打印")
 }

@@ -1,0 +1,142 @@
+syntax = "proto3";
+
+option go_package ="./pb";
+
+package pb;
+
+// ------------------------------------ 
+// Messages
+// ------------------------------------ 
+
+//--------------------------------newTable--------------------------------
+message User {
+  int64 id = 1; //Primary Key
+  string nickname = 2; //nickname
+  string mobile = 3; //mobile
+  int64 createTime = 4; //createTime
+  int64 updateTime = 5; //updateTime
+}
+
+message AddUserReq {
+  string nickname = 1; //nickname
+  string mobile = 2; //mobile
+}
+
+message AddUserResp {
+}
+
+message UpdateUserReq {
+  int64 id = 1; //Primary Key
+  string nickname = 2; //nickname
+  string mobile = 3; //mobile
+}
+
+message UpdateUserResp {
+}
+
+message DelUserReq {
+  int64 id = 1; //id
+}
+
+message DelUserResp {
+}
+
+message GetUserByIdReq {
+  int64 id = 1; //id
+}
+
+message GetUserByIdResp {
+  User user = 1; //user
+}
+
+message SearchUserReq {
+  int64 page = 1; //page
+  int64 pageSize = 2; //pageSize
+  int64 id = 3; //Primary Key
+  string nickname = 4; //nickname
+  string mobile = 5; //mobile
+  int64 createTime = 6; //createTime
+  int64 updateTime = 7; //updateTime
+}
+
+message SearchUserResp {
+  repeated User user = 1; //user
+}
+
+//--------------------------------newTable--------------------------------
+message UserData {
+  int64 id = 1; //Primary Key
+  int64 userId = 2; //userId
+  string data = 3; //data
+  int64 createTime = 4; //createTime
+  int64 updateTime = 5; //updateTime
+}
+
+message AddUserDataReq {
+  int64 userId = 1; //userId
+  string data = 2; //data
+}
+
+message AddUserDataResp {
+}
+
+message UpdateUserDataReq {
+  int64 id = 1; //Primary Key
+  int64 userId = 2; //userId
+  string data = 3; //data
+}
+
+message UpdateUserDataResp {
+}
+
+message DelUserDataReq {
+  int64 id = 1; //id
+}
+
+message DelUserDataResp {
+}
+
+message GetUserDataByIdReq {
+  int64 id = 1; //id
+}
+
+message GetUserDataByIdResp {
+  UserData userData = 1; //userData
+}
+
+message SearchUserDataReq {
+  int64 page = 1; //page
+  int64 pageSize = 2; //pageSize
+  int64 id = 3; //Primary Key
+  int64 userId = 4; //userId
+  string data = 5; //data
+  int64 createTime = 6; //createTime
+  int64 updateTime = 7; //updateTime
+}
+
+message SearchUserDataResp {
+  repeated UserData userData = 1; //userData
+}
+
+
+
+// ------------------------------------ 
+// Rpc Func
+// ------------------------------------ 
+
+service userrpcmodel{ 
+
+	 //-----------------------newTable----------------------- 
+	 rpc AddUser(AddUserReq) returns (AddUserResp); 
+	 rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp); 
+	 rpc DelUser(DelUserReq) returns (DelUserResp); 
+	 rpc GetUserById(GetUserByIdReq) returns (GetUserByIdResp); 
+	 rpc SearchUser(SearchUserReq) returns (SearchUserResp); 
+	 //-----------------------newTable----------------------- 
+	 rpc AddUserData(AddUserDataReq) returns (AddUserDataResp); 
+	 rpc UpdateUserData(UpdateUserDataReq) returns (UpdateUserDataResp); 
+	 rpc DelUserData(DelUserDataReq) returns (DelUserDataResp); 
+	 rpc GetUserDataById(GetUserDataByIdReq) returns (GetUserDataByIdResp); 
+	 rpc SearchUserData(SearchUserDataReq) returns (SearchUserDataResp); 
+
+}

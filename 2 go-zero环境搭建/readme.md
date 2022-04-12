@@ -18,3 +18,10 @@ GOPROXY=https://goproxy.cn/,direct go install github.com/zeromicro/go-zero/tools
        go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
        go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
 ``` 
+
+# 3 使用goctl快速生成代码
+vim ~./bash_profile
+```sh
+alias genapi="goctl api go -api *.api -dir ../  --style=goZero"
+alias genrpc="goctl rpc protoc *.proto --go_out=../ --go-grpc_out=../  --zrpc_out=../ --style=goZero"
+ ```

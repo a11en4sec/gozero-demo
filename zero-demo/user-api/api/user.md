@@ -20,7 +20,6 @@ type UserInforReq struct {
 
 3. 返回定义
 
-
 ```golang
 type UserInforResp struct {
 	UserId int64 `json:"userId"`

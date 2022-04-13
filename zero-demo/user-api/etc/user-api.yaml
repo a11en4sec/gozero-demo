@@ -8,6 +8,13 @@ Prometheus:
   Port: 3006
   Path: /metrics
 
+# 别名，在config.go中定义
+UserRpcConf:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+
 #链路追踪
 # Telemetry:
 #   Name: usercenter-rpc

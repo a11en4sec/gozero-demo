@@ -7,6 +7,7 @@ import (
 
 	"zero-demo/user-api/internal/svc"
 	"zero-demo/user-api/internal/types"
+	"zero-demo/user-rpc/pb"
 
 	"zero-demo/user-api/model"
 
@@ -30,10 +31,16 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 func (l *UserInfoLogic) UserInfo(req *types.UserInforReq) (resp *types.UserInforResp, err error) {
 	// todo: add your logic here and delete this line
 
-	if err := l.testOne(); err != nil {
-		logx.Errorf("err: %+v\n", err)
-	}
-	user, err := l.svcCtx.UserModel.FindOne(l.ctx, req.UserId)
+	// if err := l.testOne(); err != nil {
+	// 	logx.Errorf("err: %+v\n", err)
+	// }
+	// 在api中查询数据库
+	// user, err := l.svcCtx.UserModel.FindOne(l.ctx, req.UserId)
+
+	// 通过rpc client 调用rpc 服务
+	user, err := l.svcCtx.UserRpcClient.GetUserInfo(l.ctx, &pb.GetUserInfoReq{
+		Id: req.UserId,
+	})
 
 	if err != nil && err != model.ErrNotFound {
 		return nil, errors.New("查询数据库失败")
@@ -48,14 +55,14 @@ func (l *UserInfoLogic) UserInfo(req *types.UserInforReq) (resp *types.UserInfor
 	}, nil
 }
 
-func (l *UserInfoLogic) testOne() error {
-	return l.testTwo()
-}
+// func (l *UserInfoLogic) testOne() error {
+// 	return l.testTwo()
+// }
 
-func (l *UserInfoLogic) testTwo() error {
-	return l.testThree()
-}
+// func (l *UserInfoLogic) testTwo() error {
+// 	return l.testThree()
+// }
 
-func (l *UserInfoLogic) testThree() error {
-	return errors.Wrap(errors.New("故意报错"), "测试堆栈打印")
-}
+// func (l *UserInfoLogic) testThree() error {
+// 	return errors.Wrap(errors.New("故意报错"), "测试堆栈打印")
+// }

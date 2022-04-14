@@ -2,8 +2,8 @@ FROM golang:alpine AS builder
 
 LABEL stage=gobuilder
 
-ENV CGO_ENABLED 0
 ENV GO111MODULE=on
+ENV CGO_ENABLED 0
 ENV GOPROXY https://goproxy.cn,direct
 
 RUN apk update --no-cache && apk add --no-cache tzdata
@@ -15,7 +15,7 @@ ADD go.sum .
 RUN go mod download
 COPY . .
 COPY etc /app/etc
-RUN go build -ldflags="-s -w" -o /app/user user-api/user.go
+RUN go build -ldflags="-s -w" -o /app/user user.go
 
 
 FROM scratch
@@ -28,4 +28,4 @@ WORKDIR /app
 COPY --from=builder /app/user /app/user
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./user", "-f", "etc/user-api.yaml"]
+CMD ["./user", "-f", "etc/user.yaml"]

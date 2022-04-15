@@ -19,7 +19,7 @@ UserRpcConf:
 
 # 2 生成dockerfile
 ```
-docker -go user.go
+goctl docker -go user.go
 ```
 # 3 打镜像
 ```

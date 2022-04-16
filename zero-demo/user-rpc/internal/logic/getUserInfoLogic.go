@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
-	"user-rpc/internal/svc"
-	"user-rpc/pb"
+	"zero-demo/user-rpc/internal/svc"
+	"zero-demo/user-rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -26,6 +27,8 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 func (l *GetUserInfoLogic) GetUserInfo(in *pb.GetUserInfoReq) (*pb.GetUserInfoResp, error) {
 
 	user, _ := l.svcCtx.UserModel.FindOne(l.ctx, in.Id)
+
+	fmt.Printf("[+++++++++++++++++++++]user:%v \n", user)
 
 	return &pb.GetUserInfoResp{
 		Id:       user.Id,

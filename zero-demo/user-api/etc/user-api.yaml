@@ -15,9 +15,9 @@ UserRpcConf:
   #     - 127.0.0.1:2379
   #   Key: user.rpc
 
-  # Endpoints:
-  #   - 127.0.0.1:8080
-  Target: k8s://go-zero-looklook/basic-rpc-svc:9001
+  Endpoints:
+    - 127.0.0.1:8080
+  # Target: k8s://go-zero-looklook/basic-rpc-svc:9001
 
 #链路追踪
 # Telemetry:

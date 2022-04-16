@@ -2,6 +2,7 @@ package foo
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/pkg/errors"
 
@@ -38,6 +39,7 @@ func (l *UserInfoLogic) UserInfo(req *types.UserInforReq) (resp *types.UserInfor
 	// user, err := l.svcCtx.UserModel.FindOne(l.ctx, req.UserId)
 
 	// 通过rpc client 调用rpc 服务
+	fmt.Println("进入API函数.")
 	user, err := l.svcCtx.UserRpcClient.GetUserInfo(l.ctx, &pb.GetUserInfoReq{
 		Id: req.UserId,
 	})

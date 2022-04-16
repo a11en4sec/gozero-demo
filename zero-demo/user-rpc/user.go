@@ -1,15 +1,17 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 
-	"user-rpc/internal/config"
-	"user-rpc/internal/server"
-	"user-rpc/internal/svc"
-	"user-rpc/pb"
+	"zero-demo/user-rpc/internal/config"
+	"zero-demo/user-rpc/internal/server"
+	"zero-demo/user-rpc/internal/svc"
+	"zero-demo/user-rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
@@ -35,6 +37,22 @@ func main() {
 	})
 	defer s.Stop()
 
+	//加载服务器拦截器
+	s.AddUnaryInterceptors(TestInterCeptor)
+
+	logx.DisableStat()
+
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 	s.Start()
+}
+
+// 服务端拦截器
+func TestInterCeptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+	fmt.Println("TestInterCeptor:===========>")
+
+	// fmt.Printf("req:=======> %+v \n", req)
+	// fmt.Printf("info:=======> %+v \n", info)
+	fmt.Println("Do something Befor ....")
+	return handler(ctx, req)
+	fmt.Println("Do something After ....")
 }

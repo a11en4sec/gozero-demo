@@ -54,5 +54,4 @@ func TestInterCeptor(ctx context.Context, req interface{}, info *grpc.UnaryServe
 	// fmt.Printf("info:=======> %+v \n", info)
 	fmt.Println("Do something Befor ....")
 	return handler(ctx, req)
-	fmt.Println("Do something After ....")
 }
